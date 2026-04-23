@@ -1,0 +1,96 @@
+@startuml
+scale 800 width
+scale 300 height
+scale 0.4
+
+left to right direction
+skinparam packageStyle rectangle
+
+skinparam usecase {
+  BorderColor black
+  FontSize 13
+  BackgroundColor white
+}
+
+skinparam usecase {
+  BackgroundColor<<F>> #cfe2ff
+  BackgroundColor<<A>> #d9ead3
+  BackgroundColor<<I>> #fff2cc
+  BackgroundColor<<R>> #f4cccc
+  BackgroundColor<<FA>> #b6d7a8
+  BackgroundColor<<IR>> #ffe599
+}
+
+actor Trainer
+actor Trainer2
+actor Trainee
+
+rectangle "Minimum steps to make your training materials FAIR based on our community experience" {
+
+(Develop training materials) as START
+(Make Findable) as F_MAIN <<F>>
+(Make Accessible) as A_MAIN <<A>>
+(Make Interoperable) as I_MAIN <<I>>
+(Make Reusable) as R_MAIN <<R>>
+
+START --> F_MAIN
+F_MAIN --> A_MAIN
+A_MAIN --> I_MAIN
+I_MAIN --> R_MAIN
+
+Trainer --> START
+
+' ===== FINDABILITY =====
+(Define metadata: use minimum metadata standards) as F1 <<F>>
+(Use Bioschemas training profile) as F2 <<F>>
+(Deposit in Zenodo - assign DOI) as F3 <<F>> <<A>>
+(Register in TeSS) as F4 <<F>>
+
+F_MAIN --> F1
+F1 --> F2 : <<include>>
+F2 --> F3 : <<include>>
+F3 --> F4 : <<include>>
+
+' ===== ACCESSIBILITY =====
+(Provide access via Zenodo:HTTPS/API) as A1 <<A>>
+(Restrict access if needed:LMS) as A1 <<A>>
+(Ensure metadata remains available) as A2 <<FA>>
+
+A_MAIN --> A1
+A1 --> A2 : <<extend>>
+
+' ===== INTEROPERABILITY =====
+(Develop materials using interoperable platform: GitHub) as I1 <<IR>>
+(Use training community lesson templates: Carpentries or ELIXIR) as I1 <<IR>>
+(Use FAIR vocabularies: training and community specific from FAIRsharing) as I2 <<I>>
+(Link tools, assessment and datasets used for training with same DOI: Zenodo) as I3 <<IR>>
+(Export tools via LMS standards) as I3 <<I>>
+
+I_MAIN --> I1
+I1 --> I2 : <<include>>
+I2 --> I3 : <<include>>
+
+' ===== REUSABILITY =====
+(Describe the license) as R1.1 <<R>>
+(Track provenance via well-described metadata: Zenodo) as R1.2 <<R>>
+(Version releases:GitHub or Zenodo) as R1.2 <<IR>>
+(Provide domain-relevant community standards metadata: FAIRsharing) as R1.3 <<IR>>
+
+
+R_MAIN --> R1.1
+R1.1 --> R1.2 : <<include>>
+R1.2 --> R1.3 : <<include>>
+
+
+' ===== USER SIDE =====
+(Search via TeSS) as U1 <<F>>
+(Access via Zenodo or LMS) as U2 <<A>>
+(Reuse via well-described R principles) as U3 <<R>>
+
+Trainee --> U1
+U1 --> U2
+U2 --> U3
+Trainer2 --> U3
+}
+
+@enduml
