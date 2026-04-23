@@ -1,6 +1,4 @@
 @startuml
-scale 800 width
-scale 300 height
 
 left to right direction
 skinparam packageStyle rectangle
@@ -32,7 +30,7 @@ I_MAIN --> R_MAIN
 Trainer --> START
 
 ' ===== FINDABILITY =====
-(Define metadata standards using resources like FAIRsharing\nF2) as F1 #d0e2ff
+(Define metadata standards using\n resources like FAIRsharing\nF2) as F1 #d0e2ff
 (Use Bioschemas training\nprofile\nF2) as F2 #d0e2ff
 (Deposit in Zenodo\nassign DOI to the materials and\n ORCID for the trainers\nF1/F3) as F3 #cfe8f3
 (Register materials in TeSS\nF4) as F4 #d0e2ff
@@ -44,7 +42,7 @@ F3 --> F4
 
 ' ===== ACCESSIBILITY =====
 (Provide details of the access in the metadata\nrestricted or open\nA1.1) as A1 #d9f2d9
-(Restrict access if needed\nA1.2) as A2 #d9f2d9
+(Provide details of authentication\n and authorisation if needed e.g.LMS\nA1.2) as A2 #d9f2d9
 (Ensure metadata remains\naccessible\nA2/F1) as A3 #e2f0d9
 
 A_MAIN --> A1
