@@ -1,7 +1,6 @@
 @startuml
 scale 800 width
 scale 300 height
-scale 0.4
 
 left to right direction
 skinparam packageStyle rectangle
@@ -12,26 +11,18 @@ skinparam usecase {
   BackgroundColor white
 }
 
-skinparam usecase {
-  BackgroundColor<<F>> #cfe2ff
-  BackgroundColor<<A>> #d9ead3
-  BackgroundColor<<I>> #fff2cc
-  BackgroundColor<<R>> #f4cccc
-  BackgroundColor<<FA>> #b6d7a8
-  BackgroundColor<<IR>> #ffe599
-}
-
 actor Trainer
 actor Trainer2
 actor Trainee
 
-rectangle "Minimum steps to make your training materials FAIR based on our community experience" {
+rectangle "Minimum steps to make FAIR training materials\nbased on community experience" {
 
 (Develop training materials) as START
-(Make Findable) as F_MAIN <<F>>
-(Make Accessible) as A_MAIN <<A>>
-(Make Interoperable) as I_MAIN <<I>>
-(Make Reusable) as R_MAIN <<R>>
+
+(Make Findable) as F_MAIN #d0e2ff
+(Make Accessible) as A_MAIN #d9f2d9
+(Make Interoperable) as I_MAIN #fff4cc
+(Make Reusable) as R_MAIN #f8d7da
 
 START --> F_MAIN
 F_MAIN --> A_MAIN
@@ -41,56 +32,59 @@ I_MAIN --> R_MAIN
 Trainer --> START
 
 ' ===== FINDABILITY =====
-(Define metadata: use minimum metadata standards) as F1 <<F>>
-(Use Bioschemas training profile) as F2 <<F>>
-(Deposit in Zenodo - assign DOI) as F3 <<F>> <<A>>
-(Register in TeSS) as F4 <<F>>
+(Define metadata standards\nF1) as F1 #d0e2ff
+(Use Bioschemas training\nprofile\nF2) as F2 #d0e2ff
+(Deposit in Zenodo\nassign DOI\nF3/A1) as F3 #cfe8f3
+(Register materials in TeSS\nF4) as F4 #d0e2ff
 
 F_MAIN --> F1
-F1 --> F2 : <<include>>
-F2 --> F3 : <<include>>
-F3 --> F4 : <<include>>
+F1 --> F2 : include
+F2 --> F3 : include
+F3 --> F4 : include
 
 ' ===== ACCESSIBILITY =====
-(Provide access via Zenodo:HTTPS/API) as A1 <<A>>
-(Restrict access if needed:LMS) as A1 <<A>>
-(Ensure metadata remains available) as A2 <<FA>>
+(Provide access via Zenodo\nHTTPS or API\nA1.1) as A1 #d9f2d9
+(Restrict access if needed\nvia LMS authentication\nA1.2) as A2 #d9f2d9
+(Ensure metadata remains\naccessible\nA2/F1) as A3 #e2f0d9
 
 A_MAIN --> A1
-A1 --> A2 : <<extend>>
+A1 --> A2 : extend
+A2 --> A3
 
 ' ===== INTEROPERABILITY =====
-(Develop materials using interoperable platform: GitHub) as I1 <<IR>>
-(Use training community lesson templates: Carpentries or ELIXIR) as I1 <<IR>>
-(Use FAIR vocabularies: training and community specific from FAIRsharing) as I2 <<I>>
-(Link tools, assessment and datasets used for training with same DOI: Zenodo) as I3 <<IR>>
-(Export tools via LMS standards) as I3 <<I>>
+(Develop materials using\nGitHub platform\nI1/R) as I1 #fff4cc
+(Use community lesson templates:\nCarpentries, ELIXIR\nI2/R) as I2 #fff4cc
+(Use FAIR vocabularies via\nFAIRsharing\nI3) as I3 #fff8dc
+(Link tools, datasets,\nand assessments via DOI\nI4) as I4 #fdebd0
+(Export content using\nLMS standards\nI5) as I5 #fff8dc
 
 I_MAIN --> I1
-I1 --> I2 : <<include>>
-I2 --> I3 : <<include>>
+I1 --> I2 : include
+I2 --> I3 : include
+I3 --> I4 : include
+I4 --> I5 : extend
 
 ' ===== REUSABILITY =====
-(Describe the license) as R1.1 <<R>>
-(Track provenance via well-described metadata: Zenodo) as R1.2 <<R>>
-(Version releases:GitHub or Zenodo) as R1.2 <<IR>>
-(Provide domain-relevant community standards metadata: FAIRsharing) as R1.3 <<IR>>
+(Provide clear and\naccessible license\nR1) as R1 #f8d7da
+(Track provenance with\nrich metadata\nR2/I3) as R2 #f8d7da
+(Version releases via\nGitHub or Zenodo\nR3/I3) as R3 #f5c6cb
+(Use community and\ndomain standards\nR4/I2) as R4 #f5c6cb
 
-
-R_MAIN --> R1.1
-R1.1 --> R1.2 : <<include>>
-R1.2 --> R1.3 : <<include>>
-
+R_MAIN --> R1
+R1 --> R2 : include
+R2 --> R3 : include
+R3 --> R4 : include
 
 ' ===== USER SIDE =====
-(Search via TeSS) as U1 <<F>>
-(Access via Zenodo or LMS) as U2 <<A>>
-(Reuse via well-described R principles) as U3 <<R>>
+(Search materials via TeSS\nF) as U1 #d0e2ff
+(Access via Zenodo or LMS\nA) as U2 #d9f2d9
+(Reuse following FAIR\nprinciples\nR) as U3 #f8d7da
 
 Trainee --> U1
 U1 --> U2
 U2 --> U3
 Trainer2 --> U3
+
 }
 
 @enduml
